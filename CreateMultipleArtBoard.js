@@ -1,5 +1,9 @@
 function CreateMultipleArtBoard(){
-    var size = prompt("請輸入尺吋 用分號分隔 ex.100*200;300*400");
+    var size = prompt("請輸入尺吋 用分號分隔 ex.100*200;300*400","");
+    if(!size|| size.length==0){
+        alert("尺吋不能為空");
+        return;
+    }
     var sizes = size.split(";");
     var doc = null;
     if(app.documents.length===0){
@@ -8,8 +12,14 @@ function CreateMultipleArtBoard(){
     else{
         doc = app.activeDocument;
     }
+
     for (var i = 0; i < sizes.length; i++) {
         var targetSize = sizes[i].split("*");//取出寬和高
+        if(targetSize.length !=2)
+        {
+            alert("請輸入以*分隔的寬高");
+            continue;
+        }
         var width = parseInt(targetSize[0]);//要新增的artboard的寬
         var height = parseInt(targetSize[1]);//要新增的artboard的高
         //取得最後一個artboard
